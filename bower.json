@@ -1,0 +1,23 @@
+{
+  "name": "neighborhood_map",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Mariana Martins Menezes"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "src/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "knockout": "^3.4.2",
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7"
+  }
+}
