@@ -1,3 +1,11 @@
-/**
- * Created by marianamartins on 02/04/17.
- */
+
+var callback = function (error, data) {
+  if (error) {
+      console.log("Credo!!!");
+      return;
+  }
+
+  console.log(data);
+};
+
+zomatoApi.getRestaurants(callback);

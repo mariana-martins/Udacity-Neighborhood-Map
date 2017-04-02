@@ -6,11 +6,20 @@ var cleanCss = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
 var minifyHtml = require('gulp-minify-html');
 
-gulp.task('default', function() {
+gulp.task('default', ['load-env-vars'], function() {
     browserSync.init({
         server: "src"
     });
     gulp.watch("src/**/*").on('change', browserSync.reload);
+});
+
+// create a js file with global values
+gulp.task('load-env-vars', function() {
+    require('dotenv').config();
+    var vars = "var global = (function() { return {" +
+        "zomatoUserKey: \"" + process.env.ZOMATO_USER_KEY + "\"," +
+        "};})();"
+    require('fs').writeFileSync('src/scripts/global.js', vars);
 });
 
 gulp.task('bower', function() {
@@ -19,7 +28,7 @@ gulp.task('bower', function() {
 
 gulp.task('minify', ['minify-js', 'minify-css', 'minify-html']);
 
-gulp.task('minify-js', function () {
+gulp.task('minify-js', ['load-env-vars'], function () {
     gulp.src(['src/scripts/*.js'])
         .pipe(plumber({
             handleError: function (err) {

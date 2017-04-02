@@ -128,4 +128,11 @@ fabric.properties
 
 # End of https://www.gitignore.io/api/node,bower,webstorm
 
+# Ignore Bower components
 src/components
+
+# Ignore env variables - using dotenv to store API keys
+.env
+
+# Ignore global.js - contain api keys generated using gulp and dotenv
+src/scripts/global.js
