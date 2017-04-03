@@ -1,5 +1,6 @@
 var googleMapsApi = (function () {
-    var map;
+    var map = null;
+    var markerList = [];
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -9,7 +10,25 @@ var googleMapsApi = (function () {
         });
     }
 
+    function addMarker(lat, lng) {
+        if (!isReady()) {
+            return false;
+        }
+        var marker = new google.maps.Marker({
+            position: {lat:lat, lng:lng},
+            map: map
+        });
+        markerList.push(marker);
+        return true;
+    }
+
+    function isReady() {
+        return map != null;
+    }
+
     return {
-        initMap: initMap
+        initMap: initMap,
+        addMarker: addMarker,
+        isReady: isReady
     };
 })();

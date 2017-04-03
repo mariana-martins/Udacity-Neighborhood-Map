@@ -10,10 +10,6 @@ var Restaurant = function (data) {
 
 var ViewModel = function () {
     self = this;
-
-    // TODO: CAPTURAR O EVENTO DE CLICK NA LISTA
-    // TODO: FILTRAR ELEMENTOS DA LISTA
-
     this.restaurantList = ko.observableArray([]);
 
     // Load data to Restaurant List
@@ -22,9 +18,17 @@ var ViewModel = function () {
             alert("Error: Can't access Zomato API");
             return;
         }
+
+        while (!googleMapsApi.isReady()) { }
+
         data.restaurants.forEach(function (restaurantItem) {
             self.restaurantList.push( new Restaurant(restaurantItem.restaurant));
+            googleMapsApi.addMarker(
+                parseFloat(restaurantItem.restaurant.location.latitude),
+                parseFloat(restaurantItem.restaurant.location.longitude)
+            );
         });
+
     };
 
     // Call Zomato Api to get Restaurant List
@@ -40,12 +44,6 @@ var ViewModel = function () {
 };
 
 ko.applyBindings(new ViewModel());
-
-
-// TODO: MONTAR LAYOUT DA PAGINA
-// TODO: EXIBIR LISTA
-// TODO: PROBLEMAS DO MOBILE
-// TODO: INPUT DA BUSCA
 
 // TODO: EXIBIR OS MARCADORES COM BASE NA LISTA
 // TODO: EXIBIR O INFOWINDOW
