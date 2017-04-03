@@ -1,3 +1,4 @@
+// Restaurant Model Definition
 var Restaurant = function (data) {
     this.name = ko.observable(data.name);
     this.url = ko.observable(data.url);
@@ -15,6 +16,7 @@ var ViewModel = function () {
 
     this.restaurantList = ko.observableArray([]);
 
+    // Load data to Restaurant List
     var zomatoApiCallback = function (error, data) {
         if (error) {
             alert("Error: Can't access Zomato API");
@@ -25,6 +27,7 @@ var ViewModel = function () {
         });
     };
 
+    // Call Zomato Api to get Restaurant List
     zomatoApi.getRestaurants(zomatoApiCallback);
 
 };
