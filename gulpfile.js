@@ -18,6 +18,7 @@ gulp.task('load-env-vars', function() {
     require('dotenv').config();
     var vars = "var global = (function() { return {" +
         "zomatoUserKey: \"" + process.env.ZOMATO_USER_KEY + "\"," +
+        "googleMapsKey: \"" + process.env.GOOGLEMAPS_KEY + "\"," +
         "};})();"
     require('fs').writeFileSync('src/scripts/global.js', vars);
 });
