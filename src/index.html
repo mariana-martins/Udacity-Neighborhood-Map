@@ -28,13 +28,12 @@
             <div class="col-md-2">
                 <div  class="collapse navbar-collapse" id="restaurantList">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
+                        <input type="text" class="form-control" placeholder="Search for..." data-bind="textInput: currentFilter">
                         <span class="input-group-btn">
                                 <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
                             </span>
                     </div>
-                    <ul class="nav nav-pills nav-stacked" data-bind="foreach: restaurantList">
-
+                    <ul class="nav nav-pills nav-stacked" data-bind="foreach: filteredRestaurants">
                         <li role="presentation"><a href="#" data-bind="text: name, click: $parent.setRestaurant"></a></li>
                     </ul>
                 </div>

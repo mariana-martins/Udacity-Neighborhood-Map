@@ -45,12 +45,21 @@ var ViewModel = function () {
         console.log("Hi");
     };
 
+    this.currentFilter = ko.observable("");
+
+    this.filteredRestaurants = ko.computed(function () {
+       if (!self.currentFilter()) {
+           return self.restaurantList();
+       } else {
+           return ko.utils.arrayFilter(self.restaurantList(), function(restaurant) {
+               return restaurant.name().toLowerCase().match(self.currentFilter().toLowerCase());
+           });
+       }
+    });
+
 };
 
 ko.applyBindings(new ViewModel());
 
-// TODO: COLOCAR ANIMACAO DOS MARCADORES
-// TODO: MUDAR A COR DO MAPA
 
-// TODO: FILTRAR LISTA COM BASE NO INPUT
 // TODO: ATUALIZAR MAPA COM BASE NA LISTA
