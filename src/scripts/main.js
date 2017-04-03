@@ -25,7 +25,11 @@ var ViewModel = function () {
             self.restaurantList.push( new Restaurant(restaurantItem.restaurant));
             googleMapsApi.addMarker(
                 parseFloat(restaurantItem.restaurant.location.latitude),
-                parseFloat(restaurantItem.restaurant.location.longitude)
+                parseFloat(restaurantItem.restaurant.location.longitude),
+                restaurantItem.restaurant.name,
+                restaurantItem.restaurant.location.address,
+                restaurantItem.restaurant.url,
+                restaurantItem.restaurant.user_rating.aggregate_rating
             );
         });
 
@@ -45,7 +49,6 @@ var ViewModel = function () {
 
 ko.applyBindings(new ViewModel());
 
-// TODO: EXIBIR OS MARCADORES COM BASE NA LISTA
 // TODO: EXIBIR O INFOWINDOW
 // TODO: COLOCAR ANIMACAO DOS MARCADORES
 // TODO: MUDAR A COR DO MAPA

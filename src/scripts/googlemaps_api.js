@@ -10,7 +10,7 @@ var googleMapsApi = (function () {
         });
     }
 
-    function addMarker(lat, lng) {
+    function addMarker(lat, lng, name, address, url, rating) {
         if (!isReady()) {
             return false;
         }
@@ -18,7 +18,21 @@ var googleMapsApi = (function () {
             position: {lat:lat, lng:lng},
             map: map
         });
+
+        var contentString = "<h5><a href='"+ url +"'>" + name + "</a></h5>" +
+            "<p>" + address + "</p>" +
+            "<p> Rating: "+ rating + "</p>";
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
         markerList.push(marker);
+
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
+        });
+
         return true;
     }
 
