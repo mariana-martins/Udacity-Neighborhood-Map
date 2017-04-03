@@ -30,11 +30,11 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search for..." data-bind="textInput: currentFilter">
                         <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                <button class="btn btn-default" disabled="disabled" type="button"><span class="glyphicon glyphicon-search"></span></button>
                             </span>
                     </div>
                     <ul class="nav nav-pills nav-stacked" data-bind="foreach: filteredRestaurants">
-                        <li role="presentation"><a href="#" data-bind="text: name, click: $parent.setRestaurant"></a></li>
+                        <li role="presentation"><p class="restaurantItem" data-bind="text: name, click: $parent.setRestaurant"></p></li>
                     </ul>
                 </div>
 

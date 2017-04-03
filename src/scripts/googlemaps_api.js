@@ -21,9 +21,13 @@ var googleMapsApi = (function () {
             icon: "food.png"
         });
 
-        var contentString = "<h5><a href='"+ url +"'>" + name + "</a></h5>" +
-            "<p>" + address + "</p>" +
-            "<p> Rating: "+ rating + "</p>";
+        var contentString = "<address>" +
+            "<strong>" +
+                "<a href='" + url + "'>" + name + "</a>" +
+            "</strong><br>" +
+            address + "<br>" +
+            "<p>Rating: " + rating +  "</p>"  +
+            "</address>";
 
         var infowindow = new google.maps.InfoWindow({
             content: contentString
