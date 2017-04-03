@@ -49,7 +49,6 @@ var ViewModel = function () {
 
 ko.applyBindings(new ViewModel());
 
-// TODO: EXIBIR O INFOWINDOW
 // TODO: COLOCAR ANIMACAO DOS MARCADORES
 // TODO: MUDAR A COR DO MAPA
 

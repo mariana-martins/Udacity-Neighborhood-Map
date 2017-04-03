@@ -16,7 +16,9 @@ var googleMapsApi = (function () {
         }
         var marker = new google.maps.Marker({
             position: {lat:lat, lng:lng},
-            map: map
+            animation: google.maps.Animation.DROP,
+            map: map,
+            icon: "food.png"
         });
 
         var contentString = "<h5><a href='"+ url +"'>" + name + "</a></h5>" +
