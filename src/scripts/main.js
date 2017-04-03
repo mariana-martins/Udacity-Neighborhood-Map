@@ -48,18 +48,29 @@ var ViewModel = function () {
     this.currentFilter = ko.observable("");
 
     this.filteredRestaurants = ko.computed(function () {
-       if (!self.currentFilter()) {
-           return self.restaurantList();
-       } else {
-           return ko.utils.arrayFilter(self.restaurantList(), function(restaurant) {
-               return restaurant.name().toLowerCase().match(self.currentFilter().toLowerCase());
-           });
-       }
+        googleMapsApi.cleanAllMarkers();
+        var newList;
+        if (!self.currentFilter()) {
+            newList = self.restaurantList();
+        } else {
+            newList = ko.utils.arrayFilter(self.restaurantList(), function(restaurant) {
+                return restaurant.name().toLowerCase().match(self.currentFilter().toLowerCase());
+            });
+        }
+
+        newList.forEach(function (item) {
+            googleMapsApi.addMarker(
+                parseFloat(item.lat()),
+                parseFloat(item.lon()),
+                item.name(),
+                item.address(),
+                item.url(),
+                item.rating()
+            );
+        });
+        return newList;
     });
 
 };
 
 ko.applyBindings(new ViewModel());
-
-
-// TODO: ATUALIZAR MAPA COM BASE NA LISTA

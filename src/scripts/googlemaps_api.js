@@ -42,9 +42,17 @@ var googleMapsApi = (function () {
         return map != null;
     }
 
+    function cleanAllMarkers() {
+        markerList.forEach(function (marker) {
+            marker.setMap(null);
+        });
+        markerList = [];
+    }
+
     return {
         initMap: initMap,
         addMarker: addMarker,
-        isReady: isReady
+        isReady: isReady,
+        cleanAllMarkers: cleanAllMarkers
     };
 })();
