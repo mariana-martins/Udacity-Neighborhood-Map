@@ -30,6 +30,27 @@ var ViewModel = function () {
     // Call Zomato Api to get Restaurant List
     zomatoApi.getRestaurants(zomatoApiCallback);
 
+    this.currentRestaurant = ko.observable( this.restaurantList()[0] );
+
+    this.setRestaurant = function(clickedRestaurant) {
+        self.currentRestaurant(clickedRestaurant);
+        console.log("Hi");
+    };
+
 };
 
 ko.applyBindings(new ViewModel());
+
+
+// TODO: MONTAR LAYOUT DA PAGINA
+// TODO: EXIBIR LISTA
+// TODO: PROBLEMAS DO MOBILE
+// TODO: INPUT DA BUSCA
+
+// TODO: EXIBIR OS MARCADORES COM BASE NA LISTA
+// TODO: EXIBIR O INFOWINDOW
+// TODO: COLOCAR ANIMACAO DOS MARCADORES
+// TODO: MUDAR A COR DO MAPA
+
+// TODO: FILTRAR LISTA COM BASE NO INPUT
+// TODO: ATUALIZAR MAPA COM BASE NA LISTA
