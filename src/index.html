@@ -10,7 +10,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#restaurantList" aria-expanded="false">
@@ -26,26 +26,30 @@
     </nav>
     <!-- /Navbar -->
     <!-- Main Content: Restaurant List and Christchurch's Map -->
-    <div class="container-fluid">
-        <div class="row row-map">
-            <div class="col-md-2">
-                <div  class="collapse navbar-collapse" id="restaurantList">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for..." data-bind="textInput: currentFilter">
-                        <span class="input-group-btn">
+    <main role="main">
+        <div class="container-fluid">
+            <div class="row row-map">
+                <div class="col-md-2">
+                    <div  class="collapse navbar-collapse" id="restaurantList">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for..." data-bind="textInput: currentFilter" role="search">
+                            <span class="input-group-btn">
                                 <button class="btn btn-default" disabled="disabled" type="button"><span class="glyphicon glyphicon-search"></span></button>
                             </span>
+                        </div>
+                        <aside role="complementary">
+                            <ul class="nav nav-pills nav-stacked" data-bind="foreach: filteredRestaurants">
+                                <li role="presentation"><p class="restaurantItem" data-bind="text: name, click: $parent.setRestaurant"></p></li>
+                            </ul>
+                        </aside>
                     </div>
-                    <ul class="nav nav-pills nav-stacked" data-bind="foreach: filteredRestaurants">
-                        <li role="presentation"><p class="restaurantItem" data-bind="text: name, click: $parent.setRestaurant"></p></li>
-                    </ul>
+                </div>
+                <div class="col-md-10 col-map">
+                    <div id="map"></div>
                 </div>
             </div>
-            <div class="col-md-10 col-map">
-                <div id="map"></div>
-            </div>
         </div>
-    </div>
+    </main>
     <!-- /Main Content -->
     <script type="text/javascript" src="components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="components/bootstrap/dist/js/bootstrap.min.js"></script>
