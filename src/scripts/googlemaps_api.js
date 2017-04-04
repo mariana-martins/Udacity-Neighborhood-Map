@@ -8,7 +8,7 @@ var googleMapsApi = (function () {
         map = new google.maps.Map(document.getElementById('map'), {
             // Christchurch location
             center: {lat: -43.532054, lng: 172.636225},
-            zoom: 13
+            zoom: 12
         });
     }
 
@@ -32,7 +32,6 @@ var googleMapsApi = (function () {
             address + "<br>" +
             "<p>Rating: " + rating +  "</p>"  +
             "</address>";
-
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
