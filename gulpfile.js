@@ -8,29 +8,35 @@ var minifyHtml = require('gulp-minify-html');
 
 gulp.task('default', ['load-env-vars'], function() {
     browserSync.init({
-        server: "src"
+        server: 'src'
     });
-    gulp.watch("src/**/*").on('change', browserSync.reload);
+    gulp.watch('src/**/*').on('change', browserSync.reload);
 });
 
 // create a js file with global values
 gulp.task('load-env-vars', function() {
     require('dotenv').config();
-    var vars = "var global = (function() { return {" +
-        "zomatoUserKey: \"" + process.env.ZOMATO_USER_KEY + "\"," +
-        "googleMapsKey: \"" + process.env.GOOGLEMAPS_KEY + "\"," +
-        "};})();"
+    // Declare global variables based on dotenv.
+    var vars = 'var global = (function() { return {' +
+        'zomatoUserKey: "' + process.env.ZOMATO_USER_KEY + '",' +
+        'googleMapsKey: "' + process.env.GOOGLEMAPS_KEY + '",' +
+        '};})();';
+    // Save global variables on global.js file.
     require('fs').writeFileSync('src/scripts/global.js', vars);
 });
 
+// Run bower
 gulp.task('bower', function() {
     return bower();
 });
 
+gulp.task('dist', ['minify', 'copy-bower', 'copy-image']);
+
+// Minify project
 gulp.task('minify', ['minify-js', 'minify-css', 'minify-html']);
 
 gulp.task('minify-js', ['load-env-vars'], function () {
-    gulp.src(['src/scripts/*.js'])
+    return gulp.src(['src/scripts/*.js'])
         .pipe(plumber({
             handleError: function (err) {
                 console.log(err);
@@ -43,7 +49,7 @@ gulp.task('minify-js', ['load-env-vars'], function () {
 });
 
 gulp.task('minify-html', function() {
-    gulp.src(['src/*.html'])
+    return gulp.src(['src/*.html'])
         .pipe(plumber({
             handleError: function (err) {
                 console.log(err);
@@ -66,4 +72,28 @@ gulp.task('minify-css', function () {
         // minify css
         .pipe(cleanCss())
         .pipe(gulp.dest('dist/styles'));
+});
+
+// Copy bower resources to dist
+gulp.task('copy-bower', function () {
+    return gulp.src(['src/components/**/*'])
+        .pipe(plumber({
+            handleError: function (err) {
+                console.log(err);
+                this.emit('end');
+            }
+        }))
+        .pipe(gulp.dest('dist/components'));
+});
+
+// Copy image resources to dist
+gulp.task('copy-image', function () {
+    return gulp.src(['src/*.png'])
+        .pipe(plumber({
+            handleError: function (err) {
+                console.log(err);
+                this.emit('end');
+            }
+        }))
+        .pipe(gulp.dest('dist'));
 });
