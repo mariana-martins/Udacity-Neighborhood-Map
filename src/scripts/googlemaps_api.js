@@ -3,16 +3,16 @@ var googleMapsApi = (function () {
     // Markers' List
     var markerList = [];
 
-    // This function is releated to init the Christchurch Map.
+    // This function is related to init the Christchurch Map.
     function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById("map"), {
             // Christchurch location
             center: {lat: -43.532054, lng: 172.636225},
             zoom: 12
         });
     }
 
-    // This function add markers and infoWindow.
+    // This function add marker and its infoWindow.
     function addMarker(lat, lng, name, address, url, rating) {
         if (!isReady()) {
             return false;
@@ -32,20 +32,23 @@ var googleMapsApi = (function () {
             address + "<br>" +
             "<p>Rating: " + rating +  "</p>"  +
             "</address>";
+
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
 
+        // Add new marker to markers list
         markerList.push(marker);
 
         // infoWindow click event
-        marker.addListener('click', function() {
+        marker.addListener("click", function() {
             infowindow.open(map, marker);
         });
 
         return true;
     }
 
+    // Inform if map is loaded.
     function isReady() {
         return map != null;
     }

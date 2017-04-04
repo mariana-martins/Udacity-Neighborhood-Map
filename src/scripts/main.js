@@ -19,6 +19,7 @@ var ViewModel = function () {
             return;
         }
 
+        // Wait until maps is ready.
         while (!googleMapsApi.isReady()) { }
 
         data.restaurants.forEach(function (restaurantItem) {
@@ -38,14 +39,14 @@ var ViewModel = function () {
     // This function call Zomato Api to get Restaurant List.
     zomatoApi.getRestaurants(zomatoApiCallback);
 
-    this.currentRestaurant = ko.observable( this.restaurantList()[0] );
-
     this.currentFilter = ko.observable("");
 
     // Function to filter restaurants per name.
     this.filteredRestaurants = ko.computed(function () {
+        // Clean all markers
         googleMapsApi.cleanAllMarkers();
         var newList;
+        // Get filtered restaurants
         if (!self.currentFilter()) {
             newList = self.restaurantList();
         } else {
@@ -54,7 +55,7 @@ var ViewModel = function () {
             });
         }
 
-        // This function add data in markers and infoWindow.
+        // Add new restaurants as markers.
         newList.forEach(function (item) {
             googleMapsApi.addMarker(
                 parseFloat(item.lat()),
@@ -65,6 +66,8 @@ var ViewModel = function () {
                 item.rating()
             );
         });
+
+        // Return filtered restaurants
         return newList;
     });
 
