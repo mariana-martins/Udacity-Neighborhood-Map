@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
+    <!-- Navbar -->
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -23,6 +24,8 @@
             <p class="navbar-text navbar-right">This app use  Zomato API and Google Maps API.</p>
         </div>
     </nav>
+    <!-- /Navbar -->
+    <!-- Main Content: Restaurant List and Christchurch's Map -->
     <div class="container-fluid">
         <div class="row row-map">
             <div class="col-md-2">
@@ -37,13 +40,13 @@
                         <li role="presentation"><p class="restaurantItem" data-bind="text: name, click: $parent.setRestaurant"></p></li>
                     </ul>
                 </div>
-
             </div>
             <div class="col-md-10 col-map">
                 <div id="map"></div>
             </div>
         </div>
     </div>
+    <!-- /Main Content -->
     <script type="text/javascript" src="components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src='components/knockout/dist/knockout.js'></script>
@@ -51,6 +54,7 @@
     <script type="text/javascript" src="scripts/zomato_api.js"></script>
     <script type="text/javascript" src="scripts/googlemaps_api.js"></script>
     <script type="text/javascript" src="scripts/main.js"></script>
+    <!-- Add Google Maps API-->
     <script type="text/javascript">
         $("body").append($("<script />", {
             src: "https://maps.googleapis.com/maps/api/js?key=" + global.googleMapsKey + "&callback=googleMapsApi.initMap",

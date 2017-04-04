@@ -1,7 +1,9 @@
 var googleMapsApi = (function () {
     var map = null;
+    // Markers' List
     var markerList = [];
 
+    // This function is releated to init the Christchurch Map.
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             // Christchurch location
@@ -10,6 +12,7 @@ var googleMapsApi = (function () {
         });
     }
 
+    // This function add markers and infoWindow.
     function addMarker(lat, lng, name, address, url, rating) {
         if (!isReady()) {
             return false;
@@ -18,6 +21,7 @@ var googleMapsApi = (function () {
             position: {lat:lat, lng:lng},
             animation: google.maps.Animation.DROP,
             map: map,
+            // Marker Icon
             icon: "food.png"
         });
 
@@ -35,6 +39,7 @@ var googleMapsApi = (function () {
 
         markerList.push(marker);
 
+        // infoWindow click event
         marker.addListener('click', function() {
             infowindow.open(map, marker);
         });
@@ -46,6 +51,7 @@ var googleMapsApi = (function () {
         return map != null;
     }
 
+    // This function clean all markers
     function cleanAllMarkers() {
         markerList.forEach(function (marker) {
             marker.setMap(null);

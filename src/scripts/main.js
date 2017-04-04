@@ -12,7 +12,7 @@ var ViewModel = function () {
     self = this;
     this.restaurantList = ko.observableArray([]);
 
-    // Load data to Restaurant List
+    // This function load data to Restaurant List.
     var zomatoApiCallback = function (error, data) {
         if (error) {
             alert("Error: Can't access Zomato API");
@@ -35,18 +35,14 @@ var ViewModel = function () {
 
     };
 
-    // Call Zomato Api to get Restaurant List
+    // This function call Zomato Api to get Restaurant List.
     zomatoApi.getRestaurants(zomatoApiCallback);
 
     this.currentRestaurant = ko.observable( this.restaurantList()[0] );
 
-    this.setRestaurant = function(clickedRestaurant) {
-        self.currentRestaurant(clickedRestaurant);
-        console.log("Hi");
-    };
-
     this.currentFilter = ko.observable("");
 
+    // Function to filter restaurants per name.
     this.filteredRestaurants = ko.computed(function () {
         googleMapsApi.cleanAllMarkers();
         var newList;
@@ -58,6 +54,7 @@ var ViewModel = function () {
             });
         }
 
+        // This function add data in markers and infoWindow.
         newList.forEach(function (item) {
             googleMapsApi.addMarker(
                 parseFloat(item.lat()),
