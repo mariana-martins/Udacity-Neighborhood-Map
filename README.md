@@ -19,7 +19,7 @@ It requires to have gulp and bower globally installed.
 
 * Run `npm install`.
 
-* Run `gulp bower`.
+* Run `bower install`.
 
 * Create a file called _.env_.
 
