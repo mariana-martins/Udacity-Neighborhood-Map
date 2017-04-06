@@ -44,6 +44,11 @@ var googleMapsApi = (function () {
         marker.addListener("click", function() {
             infowindow.setContent(content);
             infowindow.open(map, marker);
+            // Animate marker
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(function () {
+                marker.setAnimation(null);
+            }, 750);
         });
 
         return true;
