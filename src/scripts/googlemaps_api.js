@@ -83,10 +83,16 @@ var googleMapsApi = (function () {
         return map != null;
     }
 
+    function closeInfoWindow() {
+        if (infowindow) {
+            infowindow.close();
+        }
+    }
+
     return {
         initMap: initMap,
         addMarker: addMarker,
-        isReady: isReady,
+        closeInfoWindow: closeInfoWindow,
         setVisible: setVisible,
         selectMarkerByName: selectMarkerByName
     };

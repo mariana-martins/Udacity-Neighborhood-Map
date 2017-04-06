@@ -12,36 +12,35 @@ var ViewModel = function () {
     self = this;
     this.restaurantList = ko.observableArray([]);
 
-    // This function load data to Restaurant List.
-    var zomatoApiCallback = function (error, data) {
-        if (error) {
-            alert('Error: Can\'t access Zomato API');
-            return;
-        }
+    this.loadData = function () {
+        // This function load data to Restaurant List.
+        var zomatoApiCallback = function (error, data) {
+            if (error) {
+                alert('Error: Can\'t access Zomato API');
+                return;
+            }
 
-        // Wait until maps is ready.
-        while (!googleMapsApi.isReady()) { }
+            data.restaurants.forEach(function (restaurantItem) {
+                self.restaurantList.push( new Restaurant(restaurantItem.restaurant));
+                googleMapsApi.addMarker(
+                    parseFloat(restaurantItem.restaurant.location.latitude),
+                    parseFloat(restaurantItem.restaurant.location.longitude),
+                    restaurantItem.restaurant.name,
+                    restaurantItem.restaurant.location.address,
+                    restaurantItem.restaurant.url,
+                    restaurantItem.restaurant.user_rating.aggregate_rating
+                );
+            });
 
-        data.restaurants.forEach(function (restaurantItem) {
-            self.restaurantList.push( new Restaurant(restaurantItem.restaurant));
-            googleMapsApi.addMarker(
-                parseFloat(restaurantItem.restaurant.location.latitude),
-                parseFloat(restaurantItem.restaurant.location.longitude),
-                restaurantItem.restaurant.name,
-                restaurantItem.restaurant.location.address,
-                restaurantItem.restaurant.url,
-                restaurantItem.restaurant.user_rating.aggregate_rating
-            );
-        });
+        };
 
+        // This function call Zomato Api to get Restaurant List.
+        zomatoApi.getRestaurants(zomatoApiCallback);
     };
 
     this.setRestaurant = function (restaurant) {
         googleMapsApi.selectMarkerByName(restaurant.name);
     };
-
-    // This function call Zomato Api to get Restaurant List.
-    zomatoApi.getRestaurants(zomatoApiCallback);
 
     this.currentFilter = ko.observable('');
 
@@ -61,6 +60,7 @@ var ViewModel = function () {
             return restaurant.name;
         });
 
+        googleMapsApi.closeInfoWindow();
         googleMapsApi.setVisible(names);
 
         // Return filtered restaurants
@@ -69,4 +69,14 @@ var ViewModel = function () {
 
 };
 
-ko.applyBindings(new ViewModel());
+var viewModel = new ViewModel();
+ko.applyBindings(viewModel);
+
+function init() {
+    googleMapsApi.initMap();
+    viewModel.loadData();
+}
+
+function mapGoogleMapsApiError() {
+    alert('Error: Can\'t access Google Maps API');
+}
