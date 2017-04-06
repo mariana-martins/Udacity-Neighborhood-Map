@@ -1,11 +1,11 @@
 // Restaurant Model Definition
 var Restaurant = function (data) {
-    this.name = ko.observable(data.name);
-    this.url = ko.observable(data.url);
-    this.address = ko.observable(data.location.address);
-    this.lat = ko.observable(data.location.latitude);
-    this.lon = ko.observable(data.location.longitude);
-    this.rating = ko.observable(data.user_rating.aggregate_rating);
+    this.name = data.name;
+    this.url = data.url;
+    this.address = data.location.address;
+    this.lat = data.location.latitude;
+    this.lon = data.location.longitude
+    this.rating = data.user_rating.aggregate_rating;
 };
 
 var ViewModel = function () {
