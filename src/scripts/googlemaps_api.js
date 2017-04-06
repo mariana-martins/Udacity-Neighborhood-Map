@@ -53,14 +53,6 @@ var googleMapsApi = (function () {
         return map != null;
     }
 
-    // This function clean all markers
-    function cleanAllMarkers() {
-        markerList.forEach(function (marker) {
-            marker.setMap(null);
-        });
-        markerList = [];
-    }
-
     return {
         initMap: initMap,
         addMarker: addMarker,

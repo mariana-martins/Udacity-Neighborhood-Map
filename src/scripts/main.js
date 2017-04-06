@@ -43,8 +43,6 @@ var ViewModel = function () {
 
     // Function to filter restaurants per name.
     this.filteredRestaurants = ko.computed(function () {
-        // Clean all markers
-        googleMapsApi.cleanAllMarkers();
         var newList;
         // Get filtered restaurants
         if (!self.currentFilter()) {
