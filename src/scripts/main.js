@@ -54,16 +54,16 @@ var ViewModel = function () {
         }
 
         // Add new restaurants as markers.
-        newList.forEach(function (item) {
-            googleMapsApi.addMarker(
-                parseFloat(item.lat()),
-                parseFloat(item.lon()),
-                item.name(),
-                item.address(),
-                item.url(),
-                item.rating()
-            );
-        });
+        // newList.forEach(function (item) {
+        //     googleMapsApi.addMarker(
+        //         parseFloat(item.lat()),
+        //         parseFloat(item.lon()),
+        //         item.name(),
+        //         item.address(),
+        //         item.url(),
+        //         item.rating()
+        //     );
+        // });
 
         // Return filtered restaurants
         return newList;
