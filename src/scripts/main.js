@@ -49,21 +49,15 @@ var ViewModel = function () {
             newList = self.restaurantList();
         } else {
             newList = ko.utils.arrayFilter(self.restaurantList(), function(restaurant) {
-                return restaurant.name().toLowerCase().match(self.currentFilter().toLowerCase());
+                return restaurant.name.toLowerCase().match(self.currentFilter().toLowerCase());
             });
         }
 
-        // Add new restaurants as markers.
-        // newList.forEach(function (item) {
-        //     googleMapsApi.addMarker(
-        //         parseFloat(item.lat()),
-        //         parseFloat(item.lon()),
-        //         item.name(),
-        //         item.address(),
-        //         item.url(),
-        //         item.rating()
-        //     );
-        // });
+        var names = newList.map(function (restaurant) {
+            return restaurant.name;
+        });
+
+        googleMapsApi.setVisible(names);
 
         // Return filtered restaurants
         return newList;

@@ -23,7 +23,7 @@ var googleMapsApi = (function () {
 
         var content = '<address>' +
             '<strong>' +
-            '<a href=\'' + url + '\'>' + name + '</a>' +
+            '<a href="' + url + '">' + name + '</a>' +
             '</strong><br>' +
             address + '<br>' +
             '<p>Rating: ' + rating +  '</p>'  +
@@ -34,7 +34,8 @@ var googleMapsApi = (function () {
             animation: google.maps.Animation.DROP,
             map: map,
             // Marker Icon
-            icon: 'food.png'
+            icon: 'food.png',
+            title: name
         });
 
         // Add new marker to markers list
@@ -54,6 +55,18 @@ var googleMapsApi = (function () {
         return true;
     }
 
+    // Update markers to visible if its title is in array. Otherwise remove visibility.
+    function setVisible(array) {
+        markerList.forEach(function (marker) {
+            var title = marker.title;
+
+            if (array.indexOf(title) >= 0) {
+                marker.setVisible(true);
+            } else
+                marker.setVisible(false);
+        })
+    }
+
     // Inform if map is loaded.
     function isReady() {
         return map != null;
@@ -62,6 +75,7 @@ var googleMapsApi = (function () {
     return {
         initMap: initMap,
         addMarker: addMarker,
-        isReady: isReady
+        isReady: isReady,
+        setVisible: setVisible
     };
 })();
