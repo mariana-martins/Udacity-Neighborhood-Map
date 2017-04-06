@@ -8,9 +8,9 @@ var zomatoApi = (function () {
     // Request Zomato API to get restaurant list from Christchurch
     function getRestaurants(callback) {
         $.ajax({
-            url: "https://developers.zomato.com/api/v2.1/search?entity_id=" + christchurchId + "&entity_type=city",
+            url: 'https://developers.zomato.com/api/v2.1/search?entity_id=' + christchurchId + '&entity_type=city',
             headers: {
-                "user-key": userKey
+                'user-key': userKey
             }
         }).done(function(data) {
             callback(null, data);

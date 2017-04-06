@@ -4,7 +4,7 @@ var Restaurant = function (data) {
     this.url = data.url;
     this.address = data.location.address;
     this.lat = data.location.latitude;
-    this.lon = data.location.longitude
+    this.lon = data.location.longitude;
     this.rating = data.user_rating.aggregate_rating;
 };
 
@@ -15,7 +15,7 @@ var ViewModel = function () {
     // This function load data to Restaurant List.
     var zomatoApiCallback = function (error, data) {
         if (error) {
-            alert("Error: Can't access Zomato API");
+            alert('Error: Can\'t access Zomato API');
             return;
         }
 
@@ -39,7 +39,7 @@ var ViewModel = function () {
     // This function call Zomato Api to get Restaurant List.
     zomatoApi.getRestaurants(zomatoApiCallback);
 
-    this.currentFilter = ko.observable("");
+    this.currentFilter = ko.observable('');
 
     // Function to filter restaurants per name.
     this.filteredRestaurants = ko.computed(function () {

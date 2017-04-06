@@ -7,7 +7,7 @@ var googleMapsApi = (function () {
 
     // This function is related to init the Christchurch Map.
     function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
+        map = new google.maps.Map(document.getElementById('map'), {
             // Christchurch location
             center: {lat: -43.532054, lng: 172.636225},
             zoom: 12
@@ -21,27 +21,27 @@ var googleMapsApi = (function () {
             return false;
         }
 
-        var content = "<address>" +
-            "<strong>" +
-            "<a href='" + url + "'>" + name + "</a>" +
-            "</strong><br>" +
-            address + "<br>" +
-            "<p>Rating: " + rating +  "</p>"  +
-            "</address>";
+        var content = '<address>' +
+            '<strong>' +
+            '<a href=\'' + url + '\'>' + name + '</a>' +
+            '</strong><br>' +
+            address + '<br>' +
+            '<p>Rating: ' + rating +  '</p>'  +
+            '</address>';
 
         var marker = new google.maps.Marker({
             position: {lat:lat, lng:lng},
             animation: google.maps.Animation.DROP,
             map: map,
             // Marker Icon
-            icon: "food.png"
+            icon: 'food.png'
         });
 
         // Add new marker to markers list
         markerList.push(marker);
 
         // infoWindow click event
-        marker.addListener("click", function() {
+        marker.addListener('click', function() {
             infowindow.setContent(content);
             infowindow.open(map, marker);
             // Animate marker
