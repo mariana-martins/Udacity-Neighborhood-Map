@@ -26,6 +26,7 @@ html, body {
     color: #FF6A54;
     font-size: 1.1em;
     padding: 5px;
+    cursor: pointer;
 }
 
 .restaurantItem:hover, .restaurantItem:focus {

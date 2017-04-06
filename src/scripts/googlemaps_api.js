@@ -55,7 +55,7 @@ var googleMapsApi = (function () {
         return true;
     }
 
-    // Update markers to visible if its title is in array. Otherwise remove visibility.
+    // Update markers to visible if its title is in array. Otherwise remove visibility.google.maps.event.trigger(marker, 'click');
     function setVisible(array) {
         markerList.forEach(function (marker) {
             var title = marker.title;
@@ -67,6 +67,17 @@ var googleMapsApi = (function () {
         })
     }
 
+    function selectMarkerByName(name) {
+        markerList.forEach(function (marker) {
+            var title = marker.title;
+
+            if (name === title) {
+                google.maps.event.trigger(marker, 'click');
+            }
+        });
+
+    }
+
     // Inform if map is loaded.
     function isReady() {
         return map != null;
@@ -76,6 +87,7 @@ var googleMapsApi = (function () {
         initMap: initMap,
         addMarker: addMarker,
         isReady: isReady,
-        setVisible: setVisible
+        setVisible: setVisible,
+        selectMarkerByName: selectMarkerByName
     };
 })();

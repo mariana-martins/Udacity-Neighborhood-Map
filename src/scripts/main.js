@@ -36,6 +36,10 @@ var ViewModel = function () {
 
     };
 
+    this.setRestaurant = function (restaurant) {
+        googleMapsApi.selectMarkerByName(restaurant.name);
+    };
+
     // This function call Zomato Api to get Restaurant List.
     zomatoApi.getRestaurants(zomatoApiCallback);
 
